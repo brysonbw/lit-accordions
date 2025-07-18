@@ -97,7 +97,6 @@ export class AccordionList extends LitElement {
    * @private
    */
   _toggleAccordion(event) {
-    /** @type {HTMLButtonElement} */
     const accordionTitle = /** @type {HTMLButtonElement} */ (
       event?.currentTarget
     );
