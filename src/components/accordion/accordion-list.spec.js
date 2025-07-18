@@ -96,7 +96,7 @@ describe('accordion-list', () => {
     );
     expect(selectAllInput).toBeTruthy();
 
-    // On initial render all are were selected so collaspe all before selectiing all again
+    // On initial render all titles are selected - collaspe before selecting again
     const titles = el.shadowRoot?.querySelectorAll('.accordion-title');
     titles?.forEach((title) => title.classList.remove('active'));
 

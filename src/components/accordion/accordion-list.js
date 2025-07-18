@@ -74,7 +74,7 @@ export class AccordionList extends LitElement {
             )
           );
 
-          // Collect accordions IDs
+          // Collect accordion IDs
           const id = Number(accordionTitle.id.split('-')[1]);
           tempAccordionsSelected.push(id);
         }
