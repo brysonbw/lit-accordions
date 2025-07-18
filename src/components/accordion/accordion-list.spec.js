@@ -79,4 +79,82 @@ describe('accordion-list', () => {
     await el.updateComplete;
     expect(firstPanel?.style.maxHeight).not.toBe('');
   });
+
+  it('exapnds all panels onClick "Select All" input checkbox', async () => {
+    document.body.innerHTML = `<accordion-list></accordion-list>`;
+
+    const el = document.querySelector('accordion-list');
+    if (el && 'updateComplete' in el) {
+      await el.updateComplete;
+    } else {
+      throw new Error('accordion-list not found');
+    }
+
+    // Find the "Select All" checkbox
+    const selectAllInput = /** @type {HTMLInputElement | null} */ (
+      el.shadowRoot?.querySelector('#accordion-select-all')
+    );
+    expect(selectAllInput).toBeTruthy();
+
+    // On initial render all are were selected so collaspe all before selectiing all again
+    const titles = el.shadowRoot?.querySelectorAll('.accordion-title');
+    titles?.forEach((title) => title.classList.remove('active'));
+
+    if (!selectAllInput) {
+      throw new Error('"Select All" input checkbox not found');
+    }
+
+    // Click the select-all checkbox
+    await userEvent.click(selectAllInput);
+    await el.updateComplete;
+
+    // Expect all panels to be expanded - maxHeight set
+    const panels = el.shadowRoot?.querySelectorAll('.accordion-panel');
+    panels?.forEach((panel) => {
+      expect(panel instanceof HTMLElement && panel.style.maxHeight).not.toBe(
+        ''
+      );
+    });
+  });
+
+  it('collapses all panels onClick "Unselect All" input checkbox', async () => {
+    document.body.innerHTML = `<accordion-list></accordion-list>`;
+
+    const el = document.querySelector('accordion-list');
+    if (el && 'updateComplete' in el) {
+      await el.updateComplete;
+    } else {
+      throw new Error('accordion-list not found');
+    }
+
+    // Find the "Unselect All" checkbox
+    const unselectAllInput = /** @type {HTMLInputElement | null} */ (
+      el.shadowRoot?.querySelector('#accordion-unselect-all')
+    );
+    expect(unselectAllInput).toBeTruthy();
+
+    // Check if all accordion titles are selected on intial render first before collapsing
+    const titles = el.shadowRoot?.querySelectorAll('.accordion-title');
+    const allActive = titles
+      ? Array.from(titles).every((title) => title.classList.contains('active'))
+      : false;
+
+    expect(allActive).toBe(true);
+
+    if (!unselectAllInput) {
+      throw new Error('"Unselect All" input checkbox not found');
+    }
+
+    // Click the unselect-all checkbox
+    await userEvent.click(unselectAllInput);
+    await el.updateComplete;
+
+    // Expect all panels to be collapsed - maxHeight empty
+    const panels = el.shadowRoot?.querySelectorAll('.accordion-panel');
+    panels?.forEach((panel) => {
+      if (panel instanceof HTMLElement) {
+        expect(panel.style.maxHeight).toBe('');
+      }
+    });
+  });
 });
