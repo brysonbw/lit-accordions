@@ -178,7 +178,7 @@ export class AccordionList extends LitElement {
                * @param {Event} event
                * @returns {void}
                */
-              (event) => this._onAccordionSelect(event, 'select-all')
+              (event) => this._onAccordionCheckboxSelection(event, 'select-all')
             }
             type="checkbox"
             id="accordion-select-all"
@@ -194,7 +194,8 @@ export class AccordionList extends LitElement {
                * @param {Event} event
                * @returns {void}
                */
-              (event) => this._onAccordionSelect(event, 'unselect-all')
+              (event) =>
+                this._onAccordionCheckboxSelection(event, 'unselect-all')
             }
             type="checkbox"
             id="accordion-unselect-all"
@@ -228,7 +229,7 @@ export class AccordionList extends LitElement {
    * @returns {void}
    * @private
    */
-  _onAccordionSelect(event, type) {
+  _onAccordionCheckboxSelection(event, type) {
     const checkbox = /** @type {HTMLInputElement} */ (event?.currentTarget);
     if (
       checkbox.tagName.toLowerCase() === 'input' &&
