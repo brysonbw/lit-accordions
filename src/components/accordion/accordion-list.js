@@ -47,7 +47,7 @@ export class AccordionList extends LitElement {
     if (accordions.length) {
       accordions.forEach((accordion) => {
         if (accordion) {
-          const accordionTitle = /** @type {HTMLElement} */ (accordion);
+          const accordionTitle = /** @type {HTMLButtonElement} */ (accordion);
           accordionTitle.classList.add('active');
 
           const accordionPanel = /** @type {HTMLElement | null} */ (
