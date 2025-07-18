@@ -15,7 +15,6 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        __dirname: true,
         ...globals.browser,
       },
     },
@@ -25,7 +24,7 @@ export default [
       'prettier/prettier': 'error',
       // Lit
       'lit/no-legacy-template-syntax': 'error',
-      'lit/no-template-arrow': 'warn',
+      'lit/no-template-arrow': 'off',
       // JSDoc
       'jsdoc/require-description': 'off',
       'jsdoc/require-property-description': 'off',
